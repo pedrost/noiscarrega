@@ -99,7 +99,7 @@ const SelecElo = ({ callback, open=true, handleClose=()=>{}, desired=false, disa
                 OURO 4
             </Grid>
             <Grid item xs={12} s={12} md={2}
-                onClick={ () => callback('PRATA 4') }
+                onClick={ () => callback('PLATINA 4') }
                 style={disabledFrom.includes('bronze') || 
                 disabledFrom.includes('ferro') ||  
                 disabledFrom.includes('prata') || 

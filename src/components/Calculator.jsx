@@ -68,6 +68,7 @@ import {
     MobileCategoryBold,
     MobileCategoryBox,
     Disclaimer,
+    DiscountBox
   } from './calculator-styles';
 
 import ironFlag from "assets/bandeira ferro 2.png";
@@ -139,6 +140,7 @@ const Calculator = () => {
   const [total, setTotal] = React.useState(0);
   const [displayedTotal, setDisplayedTotal] = React.useState(0);
   const [additionalCost, setAditionalCost] = React.useState(0);
+  const [discountedValue, setDiscountedValue] = React.useState(0);
   const [calculatorLabel1, setcalculatorLabel1] = React.useState('Divisão');
   const [calculatorLabel2, setcalculatorLabel2] = React.useState('Vitória');
 
@@ -246,26 +248,20 @@ const Calculator = () => {
       setDivisionCalculator(false);
       setVictoryCalculator(true);
       setVictoriesCount(10);
+      recalculateVictory(fromEloState, 10);
       (async() => {
-        setDisplayedTotal(0);
-        setTotal(0);
-        elos = [];
-        const resElos = await fetch(`https://lit-headland-64162.herokuapp.com/victory`);
-        const elosJson = await resElos.json();
-    
-        elosJson.forEach(elo => {
-          let temp = {};
-          temp[`${elo.elo}`] = elo.value_solo;
-          elos.push(temp);
-        });
-    
-        let fromIndex = elos.findIndex(e => Object.keys(e)[0] == fromEloState );
-        let eloPrice = elos[fromIndex][fromEloState] * victoriesCount;
-        setCurrentEloVictoryPrice(elos[fromIndex][fromEloState]);
-    
-        setTotal(eloPrice);
-        setDisplayedTotal(eloPrice);
+        const resDiscount = await fetch(`https://lit-headland-64162.herokuapp.com/md10discount`);
+        const discountJson = await resDiscount.json();
+        if(soloDivision) {
+          setDiscountedValue(discountJson.value_solo)
+        }
+        if(duoDivision) {
+          setDiscountedValue(discountJson.value_duo)
+        }
       })();
+    } else {
+      setDiscountedValue(0);
+      setVictoriesCount(1);
     }
   }
 
@@ -305,6 +301,16 @@ const Calculator = () => {
   const handleModalChangePurchase = () => {
     setModalStatePurchase(!modalStatePurchase);
   };
+
+  const handleDisplayedTotal = (dT) => {
+    if(discountedValue != 0) {
+      let discount = ( discountedValue * Number.parseFloat(dT) ) / 100
+      dT = dT - discount;
+      return dT.toFixed(2).toString().replace(".", ",");
+    } else {
+      return dT.toFixed(2).toString().replace(".", ",") 
+    }
+  }
 
   const titleize = (sentence) => {
     if(!sentence.split) return sentence;
@@ -346,7 +352,7 @@ const Calculator = () => {
     reCalculateValue({ to: e, from: fromEloState});
   }
 
-  const recalculateVictory = (from) => {
+  const recalculateVictory = (from, victories) => {
     (async() => {
       setDisplayedTotal(0);
       setTotal(0);
@@ -360,9 +366,8 @@ const Calculator = () => {
           elos.push(temp);
         });
       }
-      
       let fromIndex = elos.findIndex(e => Object.keys(e)[0] == from );
-      let eloPrice = elos[fromIndex][from] * victoriesCount;
+      let eloPrice = elos[fromIndex][from] * (victories || victoriesCount);
       setCurrentEloVictoryPrice(elos[fromIndex][from]);
 
       setTotal(eloPrice);
@@ -414,6 +419,16 @@ const Calculator = () => {
   const handleDivisionChange = () => {
     setSoloDivision(!soloDivision);
     setDuoDivision(!duoDivision);
+    if(victoryCalculator) {
+      if(!soloDivision) {
+        setDivision('SOLO');
+      }
+      if(!duoDivision) {
+        setDivision('DUO');
+      }
+      recalculateVictory(fromEloState);
+      return;
+    }
     if(!soloDivision) {
       (async () => {
         setDivision('SOLO');
@@ -443,8 +458,6 @@ const Calculator = () => {
           console.log("eloprice ", eloPrice);
           totalPrice += eloPrice;
         }
-        console.log("teste");
-        console.log('total ', totalPrice);
         setTotal(totalPrice);
         setDisplayedTotal(totalPrice);
       })();
@@ -522,6 +535,14 @@ const Calculator = () => {
     })();
   }, []);
 
+  const handleDiscountedValue = (discountedValue) => {
+    return `-${discountedValue.toString().replace(".", ",")}%`;
+  };
+
+  const handleDiscountPrice = (dT) => {
+    return dT.toFixed(2).toString().replace(".", ",") 
+  }
+
   const handleCheckChange = (serviceName) => {
     let myService = services.find((service) => {
       return service.name == serviceName
@@ -569,11 +590,11 @@ const Calculator = () => {
             Tipo de fila
           </SwitchesLeftBoldText>
         </SwitchesLeftText2>
-        <SwitchVictory style={ soloDuoQueue ? { } : { color: '#A7A5A3', background: '#CCCCCC' }} >
+        <SwitchVictory style={ soloDuoQueue ? { height: '60px', width: '200px', background: 'linear-gradient(90deg, rgba(248,211,73,1) 0%, rgba(245,173,66,1) 49%, rgba(241,128,58,1) 100%)' } : { height: '24px', width: '180px', color: '#A7A5A3', background: '#CCCCCC' }} >
           SOLO/DUO
           <PurpleSwitch2 checked={ soloDuoQueue } onClick={ () => { handleQueueChange() } } />
         </SwitchVictory>
-        <SwitchDivision2 style={ flexQueue ?  { color: 'white', background: 'linear-gradient(90deg, rgba(248,211,73,1) 0%, rgba(245,173,66,1) 49%, rgba(241,128,58,1) 100%)'} : {} } >
+        <SwitchDivision2 style={ flexQueue ?  { height: '60px', width: '200px', color: 'white', background: 'linear-gradient(90deg, rgba(248,211,73,1) 0%, rgba(245,173,66,1) 49%, rgba(241,128,58,1) 100%)'} : {} } >
           FLEX
           <PurpleSwitch2 checked={ flexQueue } onClick={ () => { handleQueueChange() } } />
         </SwitchDivision2>
@@ -635,11 +656,11 @@ const Calculator = () => {
               <BronzeElo onClick={ () => { setModalStateFrom(true) } } >
                 { fromEloState }
               </BronzeElo>
-              { !victoryCalculator &&
+              {/* { !victoryCalculator &&
               <BronzePdl>
                 0 - 20 PDL
               </BronzePdl>
-              }
+              } */}
               <BronzeQueue>
                 { division }
               </BronzeQueue>
@@ -690,14 +711,26 @@ const Calculator = () => {
               <SubTitleBox>
                 <Division>
                   DIVISAO { division }
+                  { discountedValue > 0 && 
+                    <DiscountBox>
+                      { handleDiscountedValue(discountedValue) }
+                    </DiscountBox>
+                  }
                 </Division>
-                <SalePrice>
-                  { (displayedTotal + (displayedTotal * 3 / 100)).toFixed(2).toString().replace(".", ",") } R$
-                </SalePrice>
+                { discountedValue > 0 && 
+                  <SalePrice>
+                    { handleDiscountPrice(displayedTotal)}R$
+                  </SalePrice>
+                }
               </SubTitleBox>
               <OrderBox>
-                <BoostOrder>{titleize(fromEloState)} - {titleize(toEloState)}</BoostOrder>
-                <TotalPrice>{ displayedTotal.toFixed(2).toString().replace(".", ",") } R$</TotalPrice>
+                { divisionCalculator && 
+                  <BoostOrder>{titleize(fromEloState)} - {titleize(toEloState)}</BoostOrder>
+                }
+                { victoryCalculator && 
+                  <BoostOrder>{titleize(fromEloState)} - Vitória</BoostOrder>
+                }
+                <TotalPrice>{ handleDisplayedTotal(displayedTotal) } R$</TotalPrice>
               </OrderBox>
               <OrderAditionsBox>
                 <OrdersAditionsTitle>PRODUTOS ADICIONAIS</OrdersAditionsTitle>
@@ -722,7 +755,7 @@ const Calculator = () => {
             <TotalAmountBox>
               <Disclaimer></Disclaimer>
               <TotalTitle>TOTAL</TotalTitle>
-              <TotalValue>{ displayedTotal.toFixed(2).toString().replace(".", ",") } R$</TotalValue>
+              <TotalValue>{ handleDisplayedTotal(displayedTotal)} R$</TotalValue>
               { md10 &&  
               <Disclaimer>
                 Obs: O valor das vitórias em MD10 tem desconto pois as 10 vitórias não são garantidas  

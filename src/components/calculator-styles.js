@@ -393,6 +393,18 @@ export const MobileCategoryBox = styled.div`
   border: 2px solid white;
 `;
 
+export const DiscountBox = styled.div`
+  color: white;
+  background: red;
+  width: 54px;
+  display: inline-flex;
+  justify-content: center;
+  margin: 0 8px;
+  align-items: center;
+  height: 24px;
+  border-radius: 4px;
+`;
+
 export const Disclaimer = styled.p`
   color: red;
   font-size: 12px;
