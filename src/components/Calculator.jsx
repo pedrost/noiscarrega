@@ -352,7 +352,7 @@ const Calculator = () => {
     reCalculateValue({ to: e, from: fromEloState});
   }
 
-  const recalculateVictory = (from, victories) => {
+  const recalculateVictory = (from, victories, queue='solo') => {
     (async() => {
       setDisplayedTotal(0);
       setTotal(0);
@@ -362,7 +362,12 @@ const Calculator = () => {
         const elosJson = await resElos.json();
         elosJson.forEach(elo => {
           let temp = {};
-          temp[`${elo.elo}`] = elo.value_solo;
+          if(queue == 'solo') {
+            temp[`${elo.elo}`] = elo.value_solo;
+          }
+          if(queue == 'duo') {
+            temp[`${elo.elo}`] = elo.value_duo;
+          }
           elos.push(temp);
         });
       }
@@ -422,11 +427,12 @@ const Calculator = () => {
     if(victoryCalculator) {
       if(!soloDivision) {
         setDivision('SOLO');
+        recalculateVictory(fromEloState, victoriesCount, 'solo');
       }
       if(!duoDivision) {
         setDivision('DUO');
+        recalculateVictory(fromEloState, victoriesCount, 'duo');
       }
-      recalculateVictory(fromEloState);
       return;
     }
     if(!soloDivision) {
@@ -523,12 +529,14 @@ const Calculator = () => {
 
       let fromIndex = elos.findIndex(e => Object.keys(e)[0] == fromEloState );
       let toIndex = elos.findIndex(e => Object.keys(e)[0] == toEloState );
+      console.log('from index ->', fromIndex);
+      console.log('to index ->', toIndex);
+      console.log('true ->', fromIndex <= toIndex);
       for(let i = fromIndex; i <= toIndex; i++){
         let eloPrice = Number.parseFloat(Object.values(elos[i])[0]);
         console.log("eloprice ", eloPrice);
         totalPrice += eloPrice;
       }
-      console.log("teste");
       console.log('total ', totalPrice);
       setTotal(totalPrice);
       setDisplayedTotal(totalPrice);

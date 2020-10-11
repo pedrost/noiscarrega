@@ -9,6 +9,7 @@ import Head from 'next/head';
 
 import Calculator from '../src/components/Calculator';
 import NoisCarregaLogo from '../src/assets/logo.png';
+import NoisCarregaLogoBlue from '../src/assets/logo_azul.png';
 
 import Background from '../src/assets/bg.png';
 
@@ -17,19 +18,49 @@ const IndexPageContainer = styled.div`
   height: 100%;
 `;
 
+const LogoContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  padding: 0 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const TextContainer = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 50%;
+`;
+
+const HeaderLabel = styled.div`
+  width: 100%;
+  color: #49BCF8;
+  min-width: 96px;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: 'Roboto-Regular' !important;
+  text-align: center;
+  padding: 0 4px;
+  &:hover {
+    color: #F7BE61;
+  }
+`;
+
 const HeaderContainer = styled.header`
 	margin: auto;
-	background: #1F7ADF;
-	color: white;
+	background: white;
+  color: white;
+  height: 98px;
 	text-align: center;
-	padding: 24px 16px;
 	width: 100%;
 	position: relative;
 `;
 
 const SubheaderContainer = styled.header`
   width: 100%;
-  height: 16px;
+  height: 6px;
   background: rgba(250,202,72,1);
   background: -moz-linear-gradient(left, rgba(250,202,72,1) 0%, rgba(250,201,72,1) 3%, rgba(249,196,70,1) 16%, rgba(246,183,67,1) 50%, rgba(246,183,67,1) 51%, rgba(245,167,64,1) 71%, rgba(243,152,62,1) 100%);
   background: -webkit-gradient(left top, right top, color-stop(0%, rgba(250,202,72,1)), color-stop(3%, rgba(250,201,72,1)), color-stop(16%, rgba(249,196,70,1)), color-stop(50%, rgba(246,183,67,1)), color-stop(51%, rgba(246,183,67,1)), color-stop(71%, rgba(245,167,64,1)), color-stop(100%, rgba(243,152,62,1)));
@@ -41,7 +72,12 @@ const SubheaderContainer = styled.header`
 `;
 
 const Logo = styled.img`
-  width: 240px;
+  width: 156px;
+  height: 60px;
+  margin-right: 60px;
+  @media only screen and (max-width: 768px) {
+    margin-right: 0px;
+  }
 `;
 
 
@@ -73,8 +109,20 @@ const App = () => {
         justify="center"
         alignItems="center"
         >
-				<HeaderContainer style={ { backgroundImage: "url(" + `${require("../src/assets/fundo_header.png")}` + ")"} } >
-					<Logo src={ NoisCarregaLogo }/>
+				<HeaderContainer>
+          <LogoContainer>
+            <Logo src={ NoisCarregaLogoBlue }/>
+            <Box display={{ xs: 'none', s: 'none', md: 'block' }} >
+              <TextContainer>
+                <HeaderLabel>INICIO</HeaderLabel>
+                <HeaderLabel>SOLO</HeaderLabel>
+                <HeaderLabel>DUO</HeaderLabel>
+                <HeaderLabel>SOBRE NÓS</HeaderLabel>
+                <HeaderLabel>FAQ</HeaderLabel>
+              </TextContainer>
+            </Box>
+          </LogoContainer>
+
 				</HeaderContainer>
         <SubheaderContainer></SubheaderContainer>
       </Grid>

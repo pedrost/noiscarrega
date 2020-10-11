@@ -28,8 +28,8 @@ export default createGlobalStyle`
   }
 
   @font-face {
-    font-family: 'Gilroy-Light';
-    src: url('/fonts/Gilroy-Light_0.ttf');
+    font-family: 'Roboto-Regular';
+    src: url('/fonts/Roboto-Regular.ttf');
   }
 
   * {

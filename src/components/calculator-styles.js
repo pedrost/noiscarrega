@@ -312,7 +312,7 @@ export const Queue = styled.p`
   position: absolute;
   color: white;
   left: inherit;
-  top: 65%;
+  top: 67%;
   z-index: 10;
   text-align: center;
   text-transform: uppercase;
@@ -467,7 +467,7 @@ export const BronzeElo = styled.p`
   position: absolute;
   color: white;
   left: inherit;
-  top: 57%;
+  top: 56%;
   z-index: 10;
   &::after {
     content: '';
