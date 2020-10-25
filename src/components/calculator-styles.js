@@ -18,7 +18,7 @@ export const GridContainer = styled.div`
 
 export const TitleContainer = styled.span`
   display: block;
-  font-family: 'Gilroy-Bold';
+  font-weight: 700;
   text-align: center;
   font-size: 24px;
   color: var(--primary-green);
@@ -69,7 +69,7 @@ export const VictoryCalculatorSpan = styled.span`
 
 export const SubtitleContainer = styled.span`
   display: block;
-  font-family: 'Gilroy-SemiBold';
+  font-family: 'Roboto-SemiBold';
   text-align: center;
   font-size: 14px;
   color: var(--base-gray-light);
@@ -89,13 +89,13 @@ export const QueueHeaderContainer = styled.div`
 export const QueueHeader = styled.div`
   height: 24px;
   width: 202px;
-  background: #2C5A9B;
-  color: white;
+  color: #68749D;
+  font-weight: 500;
+  font-size: 22px;
   padding-top: 12px;
   letter-spacing: 2px;
   padding-bottom: 30px;
   text-align: center;
-  border-bottom: 1px solid white;
   text-transform: uppercase;
   display: flex;
   justify-content: center;
@@ -105,29 +105,23 @@ export const QueueBox = styled.div`
   height: 42px;
   width: 202px;
   position: relative;
+  cursor: pointer;
   right: 0px;
-  background: #11386F;
-  color: white;
+  color: #49BCF8;
   padding: 8 24px;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-weight: 700;
   font-size: 24px;
-  border-bottom-right-radius: 22px;
-  border-bottom-left-radius: 22px;
-  &::after {
-    content: '';
-    display: block;
-    height: 32px;
-    width: 32px;
-    background: transparent;
-    position: absolute;
-    background-image: url(${require('../assets/arrow2.png')});
-    background-size: 32px;
-    cursor: pointer;
-    transform: rotate(180deg);
-    right: 24px;
-  }
+`;
+
+export const BorderImage = styled.img`
+  height: 58px;
+  width: 113%;
+  position: absolute;
+  bottom: -40px;
+  left: -6px;
 `;
 
 export const SwitchesLeftText = styled.div`
@@ -164,13 +158,13 @@ export const SwitchesLeftText2 = styled.div`
 `;
 
 export const SwitchesLeftBoldText = styled.div`
-  font-family:'Gilroy-Bold' !important;;
+  font-weight: 700;
   color: #112E4D;
   font-size: 24px;
 `;
 
 export const SwitchesLeftLightText = styled.div`
-  font-family:'Gilroy-Light' !important;
+  font-weight: 300;
   color: #112E4D;
   font-size: 24px;
 `;
@@ -191,36 +185,68 @@ export const CurrentElo = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 24px;
-  border: 2px solid white;
-  background: #11386F;
-  color: white;
+  color: #69759E;
   position: absolute;
-  font-size: 16px;
+  font-weight: 500;
+  font-size: 24px;
   top: -52px;
   left: 50%;
   transform: translateX(-50%);
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0px;
+    width 70%;
+    background: rgba(105, 117, 158, 0.4);
+    height: 2px;
+  }
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    width 70%;
+    background: rgba(105, 117, 158, 0.4);
+    height: 2px;
+  }
   @media only screen and (max-width: 768px) {
     left: 50%;
   }
 `;
 
 export const DesiredElo = styled.div`
-  width: 152px;
+  width: 142px;
   height: 42px;
   text-transform: uppercase;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 24px;
-  border: 2px solid white;
-  background: #3D9BE9;
-  color: white;
+  color: #69759E;
   position: absolute;
-  font-size: 16px;
+  font-weight: 500;
+  font-size: 24px;
   top: -52px;
   left: 50%;
   transform: translateX(-50%);
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0px;
+    width 70%;
+    background: rgba(105, 117, 158, 0.4);
+    height: 2px;
+  }
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    width 70%;
+    background: rgba(105, 117, 158, 0.4);
+    height: 2px;
+  }
   @media only screen and (max-width: 768px) {
     left: 50%;
   }
@@ -373,11 +399,10 @@ export const MobileCategoryContainer = styled.div`
   color: #1D3F73;
 `;
 export const MobileCategoryLight = styled.p`
-  font-family: 'Gilroy-Light' !important;
+  font-weight: 300;
 `;
 export const MobileCategoryBold = styled.p`
-  font-family: 'Gilroy-Bold' !important;
-
+  font-weight: 700;
 `;
 export const MobileCategoryBox = styled.div`
   width: 240px;
@@ -536,9 +561,23 @@ export const BronzePdl = styled.p`
 
 export const CheckoutOrderBoxContainer = styled.div`
   width: 100%;
-  background: white;
+  height: 100%;
+  position: relative;
+  z-index: 20;
+  background: transparent;
+  color: white !important;
+  border-color: white !important;
   height: 100%;
   border-radius: 24px;
+`;
+export const CheckoutOrderBgImage = styled.img`
+  z-index: -1;
+  width: 148%;
+  height: 192%;
+  position: absolute;
+  z-index: -1;
+  top: -160px;
+  right: -25%;
 `;
 
 export const CheckoutHeader = styled.div`
@@ -547,16 +586,11 @@ export const CheckoutHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #010c1c;
-  border-top: 1px solid #6F787F;
-  border-right: 1px solid #6F787F;
-  border-left: 1px solid #6F787F;
 `;
 
 export const CheckoutBody = styled.div`
   width: 100%;
   height: 342px;
-  background-color: white;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
 `;
@@ -572,41 +606,40 @@ export const OrderBox = styled.div`
   display: flex;
   padding: 0 24px 16px;
   margin: 0 0;
-  border-bottom: 1px solid #3B3B3B;
+  border-bottom: 1px solid white;
   justify-content: space-between;
-  background: white;
 `;
 
 export const Division = styled.div`
   font-weight: bold;
   font-size: 14px;
   text-transform: uppercase;
-  color: black;
+  color: white;
 `;
 
 export const SalePrice = styled.div`
   font-weight: bold;
   font-size: 14px;
   text-transform: uppercase;
-  color: #3B3B3B;
+  color: white;
   text-decoration: line-through;
 `;
 
 export const BoostOrder = styled.div`
   font-weight: bold;
   font-size: 12px;
-  font-family:'Gilroy-Regular';
+  font-family:'Roboto-Regular';
   text-transform: uppercase;
   margin: auto 0;
-  color: #3B3B3B;
+  color: white;
 `;
 
 export const CheckoutHeaderTitle = styled.div`
   font-size: 14px;
   padding-left: 16px;
   padding-top: 4px;
-  font-family:'Gilroy-Regular';
-  color: #F6B443;
+  font-family:'Roboto-Regular';
+  color: white;
 `;
 
 export const TotalPrice = styled.div`
@@ -615,46 +648,45 @@ export const TotalPrice = styled.div`
   text-transform: uppercase;
   width: 100px;
   text-align: right;
-  background: white;
-  color: #4C7CDC;
+  color: white;
+  font-weight: 700;
 `;
 
 export const OrderAditionsBox = styled.div`
   padding: 24px 24px 16px;
   margin: 0 0;
   font-weight: normal;
-  border-bottom: 1px solid #3B3B3B;
-  background: white;
+  border-bottom: 1px solid white;
 `;
 
 export const OrdersAditionsTitle = styled.div`
-  color: black;
+  color: white;
 `;
 
 export const FreeChampionAdition = styled.div`
-  color: #3B3B3B;
-  font-family: 'Gilroy';
+  color: white;
+  font-family: 'Roboto';
   justify-content: space-between;
   display: flex;
   margin: 16px 0 0;
 `;
 
 export const SpellsAdition = styled.div`
-  color: #3B3B3B;
+  color: white;
   justify-content: space-between;
   display: flex;
   margin: auto 0;
 `;
 
 export const OfflineModeAdition = styled.div`
-  color: #3B3B3B;
+  color: white;
   justify-content: space-between;
   display: flex;
   margin: auto 0;
 `;
 
 export const VPNAdition = styled.div`
-  color: #3B3B3B;
+  color: white;
   justify-content: space-between;
   display: flex;
   margin: auto 0;
@@ -663,17 +695,18 @@ export const VPNAdition = styled.div`
 export const TotalAmountBox = styled.div`
   padding: 16px 24px 16px;
   margin: 0 0;
+  z-index: 20;
   font-weight: normal;
-  border-bottom: 1px solid #3B3B3B;
-  background: white;
+  border-bottom: 1px solid white;
 `;
 
 export const TotalTitle = styled.div`
-  color: black;
+  color: white;
 `;
 
 export const TotalValue = styled.div`
-  color: #4C7CDC;
+  color: white;
+  font-weight: 700;
   font-size: 24px;
 `;
 
@@ -681,7 +714,7 @@ export const ExpressOrderBox = styled.div`
   padding: 16px 24px 16px;
   margin: 0 0;
   font-weight: normal;
-  border-bottom: 1px solid #3B3B3B;
+  border-bottom: 1px solid white;
 `;
 
 export const ExpressOrder = styled.div`
@@ -693,17 +726,17 @@ export const ButtonOrderBox = styled.div`
   border-radius: 4px;
   text-align: center;
   width: 100%;
+  z-index: 20;
   padding: 24px 0;
   cursor: pointer;
-  background: white;
 `;
 
 export const ButtonOrder = styled.div`
   margin: 0 24px;
-  color: white;
+  color: #F28C3C;
   border-radius: 4px;
   text-align: center;
-  background: #ED3833;
+  background: #FCDC4B;
   height: 42px;
   display: flex;
   justify-content: center;

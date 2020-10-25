@@ -68,7 +68,9 @@ import {
     MobileCategoryBold,
     MobileCategoryBox,
     Disclaimer,
-    DiscountBox
+    DiscountBox,
+    BorderImage,
+    CheckoutOrderBgImage
   } from './calculator-styles';
 
 import ironFlag from "assets/bandeira ferro 2.png";
@@ -77,6 +79,8 @@ import silverFlag from "assets/bandeira prata 2 (1).png";
 import goldFlag from "assets/bandeira ouro 2 (1).png";
 import platinaFlag from "assets/bandeira platina 2 (1).png";
 import diamanteFlag from "assets/bandeira diamante 2 (1).png";
+import borderImage from "assets/border.png";
+import checkoutBg from "assets/box.png";
 
 
 import SelectElo from "components/modals/SelectElo";
@@ -613,11 +617,13 @@ const Calculator = () => {
       <SelectPayment handleClose={ handleModalChangePurchase } open={ modalStatePurchase } valueParam={ displayedTotal }  />
       <GridContainer>
         <QueueHeaderContainer>
-            <QueueHeader>SERVIÇOS</QueueHeader>
+            <QueueHeader>SERVIÇO</QueueHeader>
         </QueueHeaderContainer>
-        <QueueContainer onClick={ () => { handleDivisionChange() } }>
+        <QueueContainer>
           <QueueBox>
-            { division }
+            <span onClick={ () => { handleDivisionChange() } } style={ division != 'SOLO' ? { color: '#C7C7C7'} : {} }>SOLO</span>
+            <span onClick={ () => { handleDivisionChange() } } style={ division != 'DUO' ? { color: '#C7C7C7', marginLeft: '16px' } : { marginLeft: '16px' } }>DUO</span>
+            <BorderImage src={borderImage}/>
           </QueueBox>
         </QueueContainer> 
         <Grid container 
@@ -659,7 +665,7 @@ const Calculator = () => {
           <Grid item xs={12} s={12} md={3} style={ { display:'flex'} }>
             <FlagContainer>
               <CurrentElo>
-                Elo atual
+                Elo <b style={{ marginLeft: '6px', fontWeight: 800 }} >atual</b>
               </CurrentElo>
               <BronzeElo onClick={ () => { setModalStateFrom(true) } } >
                 { fromEloState }
@@ -679,7 +685,7 @@ const Calculator = () => {
           { divisionCalculator &&
             <FlagContainer>
               <DesiredElo>
-                ELO DESEJADO
+                ELO <b style={{ marginLeft: '6px', fontWeight: 800 }}>desejado</b>
               </DesiredElo>
               <Elo onClick={ () => { setModalState(true) } } >
                 { toEloState }
@@ -709,6 +715,8 @@ const Calculator = () => {
           </Grid>
           {/* <Grid item xs={0} s={0} md={1}></Grid> */}
           <Grid item xs={12} s={12} md={4} lg={3} style={{ marginBottom: '64px' }}>
+            <div style={{ height: '100%', width: '100%', position: 'relative'}} >
+            <CheckoutOrderBgImage src={checkoutBg} />
             <CheckoutOrderBoxContainer>
               <CheckoutHeader>
                 <CheckoutHeaderTitle>
@@ -773,6 +781,7 @@ const Calculator = () => {
             <ButtonOrderBox>
               <ButtonOrder onClick={() => { setModalStatePurchase(true) }}>Comprar Boost</ButtonOrder>
             </ButtonOrderBox>
+            </div>
           </Grid>
         </Grid>
       </GridContainer>

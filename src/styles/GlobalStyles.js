@@ -36,14 +36,19 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat' !important;
+    font-family: 'Roboto';
   }
 
-  html, body, #root {
+  html {
     height: 100%;
     margin: 0px;
     padding: 0px;
-    background-image: url(${require('../assets/bg.png')});
+    background-color: white;
+    background: url(${require('../assets/bg.png')}) no-repeat -700px 102px;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
   }
 
   #__next {

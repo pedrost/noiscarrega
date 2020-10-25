@@ -1,1 +1,177 @@
-if(!self.define){const e=e=>{"require"!==e&&(e+=".js");let a=Promise.resolve();return i[e]||(a=new Promise(async a=>{if("document"in self){const i=document.createElement("script");i.src=e,document.head.appendChild(i),i.onload=a}else importScripts(e),a()})),a.then(()=>{if(!i[e])throw new Error(`Module ${e} didn’t register its module`);return i[e]})},a=(a,i)=>{Promise.all(a.map(e)).then(e=>i(1===e.length?e[0]:e))},i={require:Promise.resolve(a)};self.define=(a,c,t)=>{i[a]||(i[a]=Promise.resolve().then(()=>{let i={};const s={uri:location.origin+a.slice(1)};return Promise.all(c.map(a=>{switch(a){case"exports":return i;case"module":return s;default:return e(a)}})).then(e=>{const a=t(...e);return i.default||(i.default=a),i})}))}}define("./sw.js",["./workbox-432e0d0b"],(function(e){"use strict";importScripts(),e.skipWaiting(),e.clientsClaim(),e.precacheAndRoute([{url:"/_next/static/chunks/6903b91eaa74f689cda92164dff1276ae16f2de7.c3dc8fc263b59f0cfe43.js",revision:"d1c2b826287b81f0f4e24c338a32bb0c"},{url:"/_next/static/chunks/74776ac1a22a40adf0a241b49786d1aa78cb7838.041f6ec9c918f2e90ba2.js",revision:"aeabef091ab79192ae6de33e231c8127"},{url:"/_next/static/chunks/7addc4450ac0262937fe12d40d7ca31ff60cee14.73a86338d60d7ec35026.js",revision:"6c48a015073a593da2be608659a47e1b"},{url:"/_next/static/chunks/b322c50880fc008b9a4f368f9d0ce10288ee4075.a810a7130dc22492fa0b.js",revision:"e88d794ee4b5d1b0536b9cc3fa632c46"},{url:"/_next/static/chunks/ea0b30beee433606107b54a73e67a2af2152884d.548cbfedf81b9e3e7629.js",revision:"46b95a538a9f728b03d5a6049224f292"},{url:"/_next/static/chunks/f6078781a05fe1bcb0902d23dbbb2662c8d200b3.5e29d6074a6f4b2ba4ef.js",revision:"7ab385b30e7eb25c839bfcc69c69e2a4"},{url:"/_next/static/chunks/framework.b68933bbc8051ee73792.js",revision:"3307a0e03685c6c8c2162b0f54ef78b9"},{url:"/_next/static/chunks/main-a571bab6fdf128f7f4bc.js",revision:"30befd14e8e1a2c8b50e51c955af7322"},{url:"/_next/static/chunks/pages/_app-cb52803c9bb125e31bee.js",revision:"0f69b993ecf53c1c256bb3ccb16a47ea"},{url:"/_next/static/chunks/pages/_error-60c80d1a3dd9c1de30f1.js",revision:"43ff3d205f176ba386a2d7b7f7a2863f"},{url:"/_next/static/chunks/pages/bronze-4-para-ouro-3-e3d2cd227c6899435b7a.js",revision:"b8ca84075c8e4c5ceeef5d361c151283"},{url:"/_next/static/chunks/pages/bronze-4-para-ouro-4-a1dbb45106cba2f50016.js",revision:"fc7c7a9f2f63841abda36f82ccf5b7a5"},{url:"/_next/static/chunks/pages/index-20af66b16b7eea539339.js",revision:"43e936209b74d4d26ccc49ddbbeeb286"},{url:"/_next/static/chunks/pages/obrigado-442cbec0e5adc0eada2c.js",revision:"2b90ffba78dbc88afbd4f9022e4d7362"},{url:"/_next/static/chunks/polyfills-a4510369d9bbb73c2546.js",revision:"1619829d558e35dd5f2f5ae3f3813ff1"},{url:"/_next/static/chunks/webpack-ccf5ab034a524403276a.js",revision:"8c19f623e8389f11131a054a7e17ff95"},{url:"/_next/static/images/bandeira bronze 2 (1)-e096d5d2bd764420c129d245105b5e82.png",revision:"68326e5307eb1eab0e181a42744fa5a6"},{url:"/_next/static/images/bandeira bronze 2-ab6e298fdb19e33126e60f0dce7b0fdd.png",revision:"46c7b2eb4ed0c7541f0e0b99b77fb976"},{url:"/_next/static/images/bandeira diamante 2 (1)-d1396fe1f9e709305a0e02040e6100db.png",revision:"86c205c2d3f3308a95744696e746ab6f"},{url:"/_next/static/images/bandeira ferro 2-b67ab6eb724217424f7e1dddffc6a953.png",revision:"c12c820495db63c240720a6159be50d9"},{url:"/_next/static/images/bandeira ouro 2 (1)-541c5da91bbd02ba8bc6c14134f99403.png",revision:"505d96b27f2fe670bf4295daa8088169"},{url:"/_next/static/images/bandeira ouro 2-3014263787b73ca1dc80857a74d108eb.png",revision:"9af01fd1af3a5e21273ed754dfbf0be6"},{url:"/_next/static/images/bandeira platina 2 (1)-0a4e826b42ef37dba3f7c183886d6d11.png",revision:"3ffe600b62752aa181c36dce1bbc2d49"},{url:"/_next/static/images/bandeira prata 2 (1)-9570ac2f728720611ca2c4562f1d7ef4.png",revision:"5153b3d4959d52e3aca68c6177eb788f"},{url:"/_next/static/images/bg-3025402bb33ef271c83def4c544e9afd.png",revision:"94bbd2ea8bf54ddb4da0932793ec8e2c"},{url:"/_next/static/images/logo-55f585be6eaa1eade9fbcfd1d911f412.png",revision:"6767aca393309accece723720ec91233"},{url:"/_next/static/images/logo_azul-4ff0a3197e413fc973793fdc55bb6eda.png",revision:"175cdd7335eff3b4752bdb6b28347df7"},{url:"/_next/static/uOEqozGJAU7VSCouypy2L/_buildManifest.js",revision:"3423bfdd8aea0ca5695286145a4d33d8"},{url:"/_next/static/uOEqozGJAU7VSCouypy2L/_ssgManifest.js",revision:"abee47769bf307639ace4945f9cfd4ff"},{url:"/favicon-72x72.png",revision:"1577835e2d4edb6b1157344a538f88d9"},{url:"/fonts/Gilroy-BlackItalic_0.ttf",revision:"fba7a1177258a7e2680202eff4036c54"},{url:"/fonts/Gilroy-Black_0.ttf",revision:"b8a3b3a91be25a0030d694a34e152217"},{url:"/fonts/Gilroy-BoldItalic_0.ttf",revision:"920fb5d3a984a3906d0c681214ce0087"},{url:"/fonts/Gilroy-Bold_0.ttf",revision:"b381c2abd2972024a6a7e3d882208d9b"},{url:"/fonts/Gilroy-ExtraBoldItalic_0.ttf",revision:"9cf075de7808f747557e1845043070ab"},{url:"/fonts/Gilroy-ExtraBold_0.ttf",revision:"b487bfc69e2a1cb0578fe2a910da8b2b"},{url:"/fonts/Gilroy-HeavyItalic_0.ttf",revision:"60a85886857f1ee209e6bf10868778ac"},{url:"/fonts/Gilroy-Heavy_0.ttf",revision:"4ca59e027759f400aecadf4c1fde8599"},{url:"/fonts/Gilroy-LightItalic_0.ttf",revision:"a0904c2ad11d35a1079be6d2749bf98a"},{url:"/fonts/Gilroy-Light_0.ttf",revision:"4b236c6cb4c59d66b80dde6f9c614ebd"},{url:"/fonts/Gilroy-MediumItalic_0.ttf",revision:"5d08cc9fffd565a2b9d9baae3846cb65"},{url:"/fonts/Gilroy-Medium_0.ttf",revision:"c83281ae1ca703d0741a770ee7e7c091"},{url:"/fonts/Gilroy-RegularItalic_0.ttf",revision:"b564aec808c412ff20b83a2d779122b5"},{url:"/fonts/Gilroy-Regular_0.ttf",revision:"31ff7c1a62a300dbbf9656b4ba14a0d5"},{url:"/fonts/Gilroy-SemiBoldItalic_0.ttf",revision:"e2389bf40e3693ec0257d576bce4ff65"},{url:"/fonts/Gilroy-SemiBold_0.ttf",revision:"a5cf732b15078843b237bd58f3ed44cd"},{url:"/fonts/Gilroy-ThinItalic_0.ttf",revision:"6fe75d8801ab6a4aeb79f5627be2a655"},{url:"/fonts/Gilroy-Thin_0.ttf",revision:"437d0d08a241c1d07517909f70c8ef11"},{url:"/fonts/Gilroy-UltraLightItalic_0.ttf",revision:"5c3b028b0b0f7b4ace95ac644082400d"},{url:"/fonts/Gilroy-UltraLight_0.ttf",revision:"f5bd9c00f2cc7353bfc80031dd5d9394"},{url:"/fonts/Montserrat-Light.ttf",revision:"409c7f79a42e56c785f50ed37535f0be"},{url:"/fonts/Roboto-Regular.ttf",revision:"11eabca2251325cfc5589c9c6fb57b46"},{url:"/fonts/gilroy-extrabold.otf",revision:"01bee9655bf434da91a4f4f5eed32339"},{url:"/fonts/gilroy-light.otf",revision:"d90fa984926d3745c7e68bc525692c26"},{url:"/manifest.json",revision:"7d72ac159435f22e8f2a9752d2afbefb"},{url:"/robots.txt",revision:"fa1ded1ed7c11438a9b0385b1e112850"}],{ignoreURLParametersMatching:[]}),e.cleanupOutdatedCaches(),e.registerRoute("/",new e.NetworkFirst({cacheName:"start-url",plugins:[new e.ExpirationPlugin({maxEntries:1,maxAgeSeconds:86400,purgeOnQuotaError:!0})]}),"GET"),e.registerRoute(/^https:\/\/fonts\.(?:googleapis|gstatic)\.com\/.*/i,new e.CacheFirst({cacheName:"google-fonts",plugins:[new e.ExpirationPlugin({maxEntries:4,maxAgeSeconds:31536e3,purgeOnQuotaError:!0})]}),"GET"),e.registerRoute(/\.(?:eot|otf|ttc|ttf|woff|woff2|font.css)$/i,new e.StaleWhileRevalidate({cacheName:"static-font-assets",plugins:[new e.ExpirationPlugin({maxEntries:4,maxAgeSeconds:604800,purgeOnQuotaError:!0})]}),"GET"),e.registerRoute(/\.(?:jpg|jpeg|gif|png|svg|ico|webp)$/i,new e.StaleWhileRevalidate({cacheName:"static-image-assets",plugins:[new e.ExpirationPlugin({maxEntries:64,maxAgeSeconds:86400,purgeOnQuotaError:!0})]}),"GET"),e.registerRoute(/\.(?:js)$/i,new e.StaleWhileRevalidate({cacheName:"static-js-assets",plugins:[new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400,purgeOnQuotaError:!0})]}),"GET"),e.registerRoute(/\.(?:css|less)$/i,new e.StaleWhileRevalidate({cacheName:"static-style-assets",plugins:[new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400,purgeOnQuotaError:!0})]}),"GET"),e.registerRoute(/\.(?:json|xml|csv)$/i,new e.NetworkFirst({cacheName:"static-data-assets",plugins:[new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400,purgeOnQuotaError:!0})]}),"GET"),e.registerRoute(/\/api\/.*$/i,new e.NetworkFirst({cacheName:"apis",networkTimeoutSeconds:10,plugins:[new e.ExpirationPlugin({maxEntries:16,maxAgeSeconds:86400,purgeOnQuotaError:!0})]}),"GET"),e.registerRoute(/.*/i,new e.NetworkFirst({cacheName:"others",networkTimeoutSeconds:10,plugins:[new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400,purgeOnQuotaError:!0})]}),"GET")}));
+/**
+ * Copyright 2018 Google Inc. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// If the loader is already loaded, just stop.
+if (!self.define) {
+  const singleRequire = name => {
+    if (name !== 'require') {
+      name = name + '.js';
+    }
+    let promise = Promise.resolve();
+    if (!registry[name]) {
+      
+        promise = new Promise(async resolve => {
+          if ("document" in self) {
+            const script = document.createElement("script");
+            script.src = name;
+            document.head.appendChild(script);
+            script.onload = resolve;
+          } else {
+            importScripts(name);
+            resolve();
+          }
+        });
+      
+    }
+    return promise.then(() => {
+      if (!registry[name]) {
+        throw new Error(`Module ${name} didn’t register its module`);
+      }
+      return registry[name];
+    });
+  };
+
+  const require = (names, resolve) => {
+    Promise.all(names.map(singleRequire))
+      .then(modules => resolve(modules.length === 1 ? modules[0] : modules));
+  };
+  
+  const registry = {
+    require: Promise.resolve(require)
+  };
+
+  self.define = (moduleName, depsNames, factory) => {
+    if (registry[moduleName]) {
+      // Module is already loading or loaded.
+      return;
+    }
+    registry[moduleName] = Promise.resolve().then(() => {
+      let exports = {};
+      const module = {
+        uri: location.origin + moduleName.slice(1)
+      };
+      return Promise.all(
+        depsNames.map(depName => {
+          switch(depName) {
+            case "exports":
+              return exports;
+            case "module":
+              return module;
+            default:
+              return singleRequire(depName);
+          }
+        })
+      ).then(deps => {
+        const facValue = factory(...deps);
+        if(!exports.default) {
+          exports.default = facValue;
+        }
+        return exports;
+      });
+    });
+  };
+}
+define("./sw.js",['./workbox-ff34be65'], function (workbox) { 'use strict';
+
+  /**
+  * Welcome to your Workbox-powered service worker!
+  *
+  * You'll need to register this file in your web app.
+  * See https://goo.gl/nhQhGp
+  *
+  * The rest of the code is auto-generated. Please don't update this file
+  * directly; instead, make changes to your Workbox build configuration
+  * and re-run your build process.
+  * See https://goo.gl/2aRDsh
+  */
+
+  importScripts();
+  workbox.skipWaiting();
+  workbox.clientsClaim();
+  workbox.registerRoute("/", new workbox.NetworkFirst({
+    "cacheName": "start-url",
+    plugins: [new workbox.ExpirationPlugin({
+      maxEntries: 1,
+      maxAgeSeconds: 86400,
+      purgeOnQuotaError: true
+    })]
+  }), 'GET');
+  workbox.registerRoute(/^https:\/\/fonts\.(?:googleapis|gstatic)\.com\/.*/i, new workbox.CacheFirst({
+    "cacheName": "google-fonts",
+    plugins: [new workbox.ExpirationPlugin({
+      maxEntries: 4,
+      maxAgeSeconds: 31536000,
+      purgeOnQuotaError: true
+    })]
+  }), 'GET');
+  workbox.registerRoute(/\.(?:eot|otf|ttc|ttf|woff|woff2|font.css)$/i, new workbox.StaleWhileRevalidate({
+    "cacheName": "static-font-assets",
+    plugins: [new workbox.ExpirationPlugin({
+      maxEntries: 4,
+      maxAgeSeconds: 604800,
+      purgeOnQuotaError: true
+    })]
+  }), 'GET');
+  workbox.registerRoute(/\.(?:jpg|jpeg|gif|png|svg|ico|webp)$/i, new workbox.StaleWhileRevalidate({
+    "cacheName": "static-image-assets",
+    plugins: [new workbox.ExpirationPlugin({
+      maxEntries: 64,
+      maxAgeSeconds: 86400,
+      purgeOnQuotaError: true
+    })]
+  }), 'GET');
+  workbox.registerRoute(/\.(?:js)$/i, new workbox.StaleWhileRevalidate({
+    "cacheName": "static-js-assets",
+    plugins: [new workbox.ExpirationPlugin({
+      maxEntries: 32,
+      maxAgeSeconds: 86400,
+      purgeOnQuotaError: true
+    })]
+  }), 'GET');
+  workbox.registerRoute(/\.(?:css|less)$/i, new workbox.StaleWhileRevalidate({
+    "cacheName": "static-style-assets",
+    plugins: [new workbox.ExpirationPlugin({
+      maxEntries: 32,
+      maxAgeSeconds: 86400,
+      purgeOnQuotaError: true
+    })]
+  }), 'GET');
+  workbox.registerRoute(/\.(?:json|xml|csv)$/i, new workbox.NetworkFirst({
+    "cacheName": "static-data-assets",
+    plugins: [new workbox.ExpirationPlugin({
+      maxEntries: 32,
+      maxAgeSeconds: 86400,
+      purgeOnQuotaError: true
+    })]
+  }), 'GET');
+  workbox.registerRoute(/\/api\/.*$/i, new workbox.NetworkFirst({
+    "cacheName": "apis",
+    "networkTimeoutSeconds": 10,
+    plugins: [new workbox.ExpirationPlugin({
+      maxEntries: 16,
+      maxAgeSeconds: 86400,
+      purgeOnQuotaError: true
+    })]
+  }), 'GET');
+  workbox.registerRoute(/.*/i, new workbox.NetworkFirst({
+    "cacheName": "others",
+    "networkTimeoutSeconds": 10,
+    plugins: [new workbox.ExpirationPlugin({
+      maxEntries: 32,
+      maxAgeSeconds: 86400,
+      purgeOnQuotaError: true
+    })]
+  }), 'GET');
+
+});
+//# sourceMappingURL=sw.js.map

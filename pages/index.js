@@ -43,8 +43,35 @@ const HeaderLabel = styled.div`
   font-family: 'Roboto-Regular' !important;
   text-align: center;
   padding: 0 4px;
+  position: relative;
+  &:after {
+    content: '';
+    display: block;
+    width: 2px;
+    position: absolute;
+    height: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -10px;
+    z-index: 10;
+    transition: width 0.5s;
+    background-color: white;
+  }
   &:hover {
     color: #F7BE61;
+    &:after {
+      content: '';
+      display: block;
+      width: 50%;
+      position: absolute;
+      height: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -10px;
+      z-index: 10;
+      transition: width 0.5s;
+      background-color: #F7BE61;
+    }
   }
 `;
 
@@ -56,6 +83,12 @@ const HeaderContainer = styled.header`
 	text-align: center;
 	width: 100%;
 	position: relative;
+`;
+
+const MyBox = styled.div`
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const SubheaderContainer = styled.header`
@@ -87,7 +120,7 @@ const App = () => {
   }, []);
 
   return (
-    <IndexPageContainer style={ { backgroundImage: "url(" + `${require("../src/assets/bg.png")}` + ")"} }>
+    <IndexPageContainer>
       <Head>
         <title>Nois Carrega - Calculadora</title>
         <meta charSet='utf-8' />
@@ -112,7 +145,7 @@ const App = () => {
 				<HeaderContainer>
           <LogoContainer>
             <Logo src={ NoisCarregaLogoBlue }/>
-            <Box display={{ xs: 'none', s: 'none', md: 'block' }} >
+            <MyBox>
               <TextContainer>
                 <HeaderLabel>INICIO</HeaderLabel>
                 <HeaderLabel>SOLO</HeaderLabel>
@@ -120,7 +153,7 @@ const App = () => {
                 <HeaderLabel>SOBRE NÓS</HeaderLabel>
                 <HeaderLabel>FAQ</HeaderLabel>
               </TextContainer>
-            </Box>
+            </MyBox>
           </LogoContainer>
 
 				</HeaderContainer>
