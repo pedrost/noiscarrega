@@ -70,7 +70,8 @@ import {
     Disclaimer,
     DiscountBox,
     BorderImage,
-    CheckoutOrderBgImage
+    CheckoutOrderBgImage,
+    SwitchBg
   } from './calculator-styles';
 
 import ironFlag from "assets/bandeira ferro 2.png";
@@ -82,6 +83,9 @@ import diamanteFlag from "assets/bandeira diamante 2 (1).png";
 import borderImage from "assets/border.png";
 import checkoutBg from "assets/box.png";
 
+import leftBg from "assets/esq_azul.png";
+import leftBgLaranja from "assets/esq_laranja.png";
+import leftBgCinza from "assets/esq_cinza.png";
 
 import SelectElo from "components/modals/SelectElo";
 import SelectPayment from "components/modals/PaymentModal";
@@ -584,13 +588,17 @@ const Calculator = () => {
             Categoria
           </SwitchesLeftBoldText>
         </SwitchesLeftText>
-        <SwitchDivision style={ divisionCalculator ? { } : { height: '24px', color: '#A7A5A3', background: '#CCCCCC', width: '160px' }}>
+        <SwitchDivision style={ divisionCalculator ? { } : { height: '24px', color: 'white', width: '160px' }}>
           { calculatorLabel1 }
-          <PurpleSwitch2 checked={ divisionCalculator } onClick={ () => { handleCalculatorChange() } } />
+          <SwitchBg style={divisionCalculator ? {} : { width: 200 }}  src={divisionCalculator ? leftBg : leftBgCinza} />
+          <input checked={divisionCalculator}  type="checkbox"  /><label onClick={() => { handleCalculatorChange() }} for="switch">Toggle</label>
+          {/* <PurpleSwitch2 checked={ divisionCalculator } onClick={ () => { handleCalculatorChange() } } /> */}
         </SwitchDivision>
-        <SwitchDivision2 style={ victoryCalculator ? { height: '60px', width: '200px', color: 'white', background: 'rgb(56,154,222)', background: 'linear-gradient(90deg, rgba(56,154,222,1) 0%, rgba(33,109,176,1) 49%, rgba(8,58,117,1) 100%)' } : { color: '#A7A5A3', background: '#CCCCCC' }} >
+        <SwitchDivision2 style={ victoryCalculator ? { height: '60px', width: '200px', color: 'white',  } : { color: 'white' }} >
           { calculatorLabel2 }
-          <PurpleSwitch2 checked={ victoryCalculator } onClick={ ()  => { handleCalculatorChange('off') } } />
+          <SwitchBg style={victoryCalculator ? {} : { width: 200 }} src={victoryCalculator ? leftBg : leftBgCinza} />
+          <input checked={victoryCalculator} type="checkbox"  /><label onClick={() => { handleCalculatorChange('off') }} for="switch">Toggle</label>
+          {/* <PurpleSwitch2 checked={ victoryCalculator } onClick={ ()  => { handleCalculatorChange('off') } } /> */}
         </SwitchDivision2>
       </SwitchesLeftContainer>
       <SwitchesLeftContainer style={ { top: '40%'} }>
@@ -602,13 +610,17 @@ const Calculator = () => {
             Tipo de fila
           </SwitchesLeftBoldText>
         </SwitchesLeftText2>
-        <SwitchVictory style={ soloDuoQueue ? { height: '60px', width: '200px', background: 'linear-gradient(90deg, rgba(248,211,73,1) 0%, rgba(245,173,66,1) 49%, rgba(241,128,58,1) 100%)' } : { height: '24px', width: '180px', color: '#A7A5A3', background: '#CCCCCC' }} >
+        <SwitchVictory style={ soloDuoQueue ? { height: '60px', width: '200px' } : { height: '24px', width: '170px', color: 'white' }} >
           SOLO/DUO
-          <PurpleSwitch2 checked={ soloDuoQueue } onClick={ () => { handleQueueChange() } } />
+          <SwitchBg style={soloDuoQueue ? {} : { width: 200 }}  src={soloDuoQueue ? leftBgLaranja : leftBgCinza} />
+          <input checked={soloDuoQueue} type="checkbox"  /><label onClick={() => { handleQueueChange(1) }} for="switch">Toggle</label>
+          {/* <PurpleSwitch2 checked={ soloDuoQueue } onClick={ () => { handleQueueChange() } } /> */}
         </SwitchVictory>
-        <SwitchDivision2 style={ flexQueue ?  { height: '60px', width: '200px', color: 'white', background: 'linear-gradient(90deg, rgba(248,211,73,1) 0%, rgba(245,173,66,1) 49%, rgba(241,128,58,1) 100%)'} : {} } >
+        <SwitchDivision2 style={ flexQueue ?  { height: '60px', width: '200px', color: 'white'} : {} } >
           FLEX
-          <PurpleSwitch2 checked={ flexQueue } onClick={ () => { handleQueueChange() } } />
+          <SwitchBg style={flexQueue ? {} : { width: 200 }}  src={flexQueue ? leftBgLaranja : leftBgCinza} />
+          <input checked={flexQueue} type="checkbox"  /><label onClick={() => { handleQueueChange(1) }} for="switch">Toggle</label>
+          {/* <PurpleSwitch2 checked={ flexQueue } onClick={ () => { handleQueueChange() } } /> */}
         </SwitchDivision2>
       </SwitchesLeftContainer>
 
@@ -720,7 +732,7 @@ const Calculator = () => {
             <CheckoutOrderBoxContainer>
               <CheckoutHeader>
                 <CheckoutHeaderTitle>
-                  { totalCustomers } Compraram
+                  { totalCustomers == 0 ? '-' : totalCustomers } Compraram
                 </CheckoutHeaderTitle>
                 <Rating name="read-only" value={5} readOnly  style={ { paddingRight: '16px'} }/>
               </CheckoutHeader>
@@ -754,7 +766,8 @@ const Calculator = () => {
                   victoryCalculator &&
                     <FreeChampionAdition style={ { marginTop: 0 } }>
                       <span style={ { margin: 'auto 0' } }>MD10</span>
-                      <PurpleSwitch checked={md10} onChange={() => { handleMd10Switch() }} name="checkedA"/>
+                      <input checked={md10} type="checkbox"  onClick={() => { handleMd10Switch() }} /><label for="switch">Toggle</label>
+                      {/* <PurpleSwitch checked={md10} onChange={() => { handleMd10Switch() }} name="checkedA"/> */}
                     </FreeChampionAdition>
                 }
                 { services.length > 0 ? services.map((service, index) => {
@@ -762,7 +775,8 @@ const Calculator = () => {
                   return (
                   <FreeChampionAdition style={ (index > 0 || victoryCalculator ) ? { marginTop: 0 } : {} }>
                     <span style={ { margin: 'auto 0' } }>{ service.name }</span>
-                    <PurpleSwitch checked={checked[service.name]} onChange={() => { handleCheckChange(service.name) }} name="checkedA"/>
+                    <input checked={checked[service.name]} type="checkbox"  onClick={() => { handleCheckChange(service.name) }} /><label for="switch">Toggle</label>
+                    {/* <PurpleSwitch checked={checked[service.name]} onChange={() => { handleCheckChange(service.name) }} name="checkedA"/> */}
                   </FreeChampionAdition>
                   )
                 }) : <CircularProgress style={ { marginTop: '16px' } }/> }

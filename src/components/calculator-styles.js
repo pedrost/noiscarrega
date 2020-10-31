@@ -127,6 +127,7 @@ export const BorderImage = styled.img`
 export const SwitchesLeftText = styled.div`
   color: #112E4D;
   margin-left: 24px;
+  margin-bottom: 24px;
   position: relative;
   text-transform: uppercase;
   &::before{
@@ -144,6 +145,7 @@ export const SwitchesLeftText2 = styled.div`
   margin-top: 32px;
   color: #112E4D;
   margin-left: 24px;
+  margin-bottom: 24px;
   position: relative;
   text-transform: uppercase;
   &::before{
@@ -439,33 +441,45 @@ export const SwitchDivision = styled.div`
   height: 60px;
   width: 200px;
   justify-content: space-between;
-  border-top-right-radius: 24px;
-  border-bottom-right-radius: 24px;
   display: flex;
   align-items: center;
-  padding: 24px;
+  padding: 24px 16px;
+  text-transform: uppercase;
+  font-weight: 400;
   color: white;
+  position: relative;
   transition: width 1s, height 0.2s;
-  border: 2px solid white;
   margin: 16px 0;
-  background: rgb(56,154,222);
-  background: linear-gradient(90deg, rgba(56,154,222,1) 0%, rgba(33,109,176,1) 49%, rgba(8,58,117,1) 100%);
+  background: transparent;
+  position: relative;
 `;
+
+export const SwitchBg = styled.img`
+  height: auto;
+  width: 240px;
+  z-index: -1;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+`;
+
 
 export const SwitchDivision2 = styled.div`
   height: 24px;
   width: 160px;
   transition: width 1s, height 0.2s;
   justify-content: space-between;
-  border-top-right-radius: 24px;
-  border-bottom-right-radius: 24px;
   display: flex;
+  border-bottom-right-radius: 20px;
+  text-transform: uppercase;
+  font-weight: 400;
   align-items: center;
-  padding: 24px;
-  color: #A7A5A3;
-  border: 2px solid white;
+  padding: 24px 16px;
+  color: white;
+  font-weight: 600;
   margin: 16px 0;
-  background: #CCCCCC;
+  position: relative;
 `;
 
 export const SwitchVictory = styled.div`
@@ -473,15 +487,12 @@ export const SwitchVictory = styled.div`
   width: 200px;
   justify-content: space-between;
   margin: 16px 0;
-  padding: 24px;
+  padding: 24px 16px;
   display: flex;
+  font-weight: 600;
   color: white;
   align-items: center;
-  border-top-right-radius: 24px;
-  border-bottom-right-radius: 24px;
-  border: 2px solid white;
-  background: rgb(248,211,73);
-  background: linear-gradient(90deg, rgba(248,211,73,1) 0%, rgba(245,173,66,1) 49%, rgba(241,128,58,1) 100%);
+  position: relative;
 `;
 
 export const BronzeElo = styled.p`

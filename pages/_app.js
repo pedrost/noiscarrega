@@ -3,6 +3,7 @@ import GlobalStyles from '../src/styles/GlobalStyles';
 
 import "../config/i18n";
 import "isomorphic-fetch";
+import "css-checkbox-library"
 
 export default function MyApp({ Component, pageProps }) {
 

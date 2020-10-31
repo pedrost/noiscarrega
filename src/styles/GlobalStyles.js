@@ -51,6 +51,47 @@ export default createGlobalStyle`
     background-size: cover;
   }
 
+  input[type=checkbox] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+ }
+  label {
+    margin: 10px 0;
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 42px;
+    height: 16px;
+    background: white;
+    display: block;
+    border: 1px solid white;
+    position: relative;
+ }
+  label:after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    width: 10px;
+    height: 24px;
+    top: -6px;
+    border: 1px solid white;
+    background: #afafaf;
+    transition: 0.3s;
+ }
+  input:checked + label {
+    background: white;
+ }
+  input:checked + label:after {
+    background: #46b5f1 !important;
+ }
+  input:checked + label:after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+ }
+  label:active:after {
+    width: 10px;
+ }
+
   #__next {
     height: 100%;
   }

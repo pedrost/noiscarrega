@@ -34,10 +34,11 @@ const TextContainer = styled.div`
   width: 50%;
 `;
 
-const HeaderLabel = styled.div`
+const HeaderLabel = styled.a`
   width: 100%;
   color: #49BCF8;
   min-width: 96px;
+  text-decoration: none;
   font-size: 16px;
   cursor: pointer;
   font-family: 'Roboto-Regular' !important;
@@ -147,11 +148,11 @@ const App = () => {
             <Logo src={ NoisCarregaLogoBlue }/>
             <MyBox>
               <TextContainer>
-                <HeaderLabel>INICIO</HeaderLabel>
-                <HeaderLabel>SOLO</HeaderLabel>
-                <HeaderLabel>DUO</HeaderLabel>
-                <HeaderLabel>SOBRE NÓS</HeaderLabel>
-                <HeaderLabel>FAQ</HeaderLabel>
+                <HeaderLabel href="https://www.noiscarrega.com.br/" rel="noopener" target="blank">INICIO</HeaderLabel>
+                <HeaderLabel href="https://www.noiscarrega.com.br/solo" rel="noopener" target="blank" >SOLO</HeaderLabel>
+                <HeaderLabel href="https://www.noiscarrega.com.br/" rel="noopener" target="blank">DUO</HeaderLabel>
+                <HeaderLabel href="https://www.noiscarrega.com.br/sobre-nós" rel="noopener" target="blank">SOBRE NÓS</HeaderLabel>
+                <HeaderLabel href="https://www.noiscarrega.com.br/" rel="noopener" target="blank">FAQ</HeaderLabel>
               </TextContainer>
             </MyBox>
           </LogoContainer>
