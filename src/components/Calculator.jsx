@@ -6,12 +6,22 @@ import Switch from '@material-ui/core/Switch';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Rating from '@material-ui/lab/Rating';
 import "isomorphic-fetch";
+import styled from 'styled-components';
+
+const MobileMgTop = styled.div`
+  margin-top: 0px;
+  width: 100%;
+  @media only screen and (max-width: 768px) {
+    margin-top: 24px;
+  }
+`;
 
 import { 
     HeaderProfileContainer,
     GridContainer,
     FlagContainer,
     FlagImg,
+    MobileMgTop2,
     Capacete2,
     Capacete1,
     BronzeFlag,
@@ -67,7 +77,12 @@ import {
     MobileCategoryLight,
     MobileCategoryBold,
     MobileCategoryBox,
+    DivRightContainer,
     Disclaimer,
+    PromotionInput,
+    PromotionErrorLabel,
+    PromotionSuccessLabel,
+    PromotionInputLabel,
     DiscountBox,
     BorderImage,
     CheckoutOrderBgImage,
@@ -131,6 +146,11 @@ const Calculator = () => {
   const [md10, setMd10] = React.useState(false);
   const [totalCustomers, setTotalCustomers] = React.useState(0);
   const [victoriesCount, setVictoriesCount] = React.useState(1);
+  const [inputPromotionValue, setInputPromotionValue] = React.useState("");
+  const [promotionValueDiscount, setPromotionValueDiscount] = React.useState(0);
+  const [promotionPercentageDiscount, setpromotionPercentageDiscount] = React.useState(0);
+  const [promotionError, setPromotionError] = React.useState("");
+  const [promotionSuccessLabel, setPromotionSuccessLabel] = React.useState("");
   const [fromEloState, setFromEloState] = React.useState('FERRO 4');
   const [toEloState, setToEloState] = React.useState('OURO 4');
   const [currentEloVictoryPrice, setCurrentEloVictoryPrice] = React.useState(0);
@@ -311,12 +331,20 @@ const Calculator = () => {
   };
 
   const handleDisplayedTotal = (dT) => {
-    if(discountedValue != 0) {
-      let discount = ( discountedValue * Number.parseFloat(dT) ) / 100
-      dT = dT - discount;
-      return dT.toFixed(2).toString().replace(".", ",");
+    let dc = discountedValue;
+    let value = Number.parseFloat(dT);
+    if(promotionPercentageDiscount != 0) {
+      dc += promotionPercentageDiscount;
+    }
+    if(promotionValueDiscount != 0) {
+      value = value - promotionValueDiscount;
+    }
+    if(dc != 0) {
+      let discount = ( dc * value ) / 100
+      value = value - discount;
+      return value.toFixed(2).toString().replace(".", ",");
     } else {
-      return dT.toFixed(2).toString().replace(".", ",") 
+      return value.toFixed(2).toString().replace(".", ",") 
     }
   }
 
@@ -551,12 +579,48 @@ const Calculator = () => {
     })();
   }, []);
 
-  const handleDiscountedValue = (discountedValue) => {
-    return `-${discountedValue.toString().replace(".", ",")}%`;
-  };
+  const handlePromotioncall = async (param) => {
+    const res = await fetch(`https://lit-headland-64162.herokuapp.com/promotion?name=${param}`);
+    const resJson = await res.json();
+    if(resJson) {
+      debugger;
+      if(resJson.discount_value && resJson.discount_value != "0.0") {
+        setPromotionError("");
+        setPromotionValueDiscount(Number.parseFloat(resJson.discount_value));
+        setPromotionSuccessLabel("Cupom aplicado !")
+        return;
+      }
+      if(resJson.discount_percentage && resJson.discount_percentage != "0.0") {
+        setPromotionError("");
+        setpromotionPercentageDiscount(Number.parseFloat(resJson.discount_percentage));
+        setPromotionSuccessLabel("Cupom aplicado !")
+        return;
+      }
+    } else {
+      setPromotionError("Cupom não encontrado");
+      setPromotionSuccessLabel("")
+    }
+  }
 
-  const handleDiscountPrice = (dT) => {
-    return dT.toFixed(2).toString().replace(".", ",") 
+  const handleDiscountedValue = (dT, promotionValueDiscount, promotionPercentageDiscount) => {
+    dT = Number.parseFloat(dT);
+    if((dT > 0 || promotionPercentageDiscount > 0) && promotionValueDiscount > 0) {
+      debugger;
+      alert(promotionPercentageDiscount + dT)
+      return `-${(dT + promotionValueDiscount).toFixed(2).toString().replace(".00", "")}% && -${(promotionValueDiscount).toFixed(2).toString().replace(".", ",")}R$`; 
+    }
+    if(promotionValueDiscount > 0) {
+      return `-${(promotionValueDiscount)}R$`; 
+    }
+    if(dT > 0 || promotionPercentageDiscount > 0) {
+      return `-${(dT + promotionPercentageDiscount).toFixed(2).toString().replace(".00", "")}%`;
+    }
+  }
+
+  const handleDiscountPrice2 = (dT) => {
+    if(dT) {
+      return `${(dT).toFixed(2).toString().replace(".", ",")}`;
+    }
   }
 
   const handleCheckChange = (serviceName) => {
@@ -579,6 +643,7 @@ const Calculator = () => {
   return (
     <>
     <HeaderProfileContainer>
+      <div style={{ position: 'absolute', top: 200 }}>
       <SwitchesLeftContainer>
         <SwitchesLeftText>
           <SwitchesLeftLightText>
@@ -597,11 +662,11 @@ const Calculator = () => {
         <SwitchDivision2 style={ victoryCalculator ? { height: '60px', width: '200px', color: 'white',  } : { color: 'white' }} >
           { calculatorLabel2 }
           <SwitchBg style={victoryCalculator ? {} : { width: 200 }} src={victoryCalculator ? leftBg : leftBgCinza} />
-          <input checked={victoryCalculator} type="checkbox"  /><label onClick={() => { handleCalculatorChange('off') }} for="switch">Toggle</label>
+          <input checked={victoryCalculator} type="checkbox"  /><label onClick={() => { handleCalculatorChange('off') }}  for="switch">Toggle</label>
           {/* <PurpleSwitch2 checked={ victoryCalculator } onClick={ ()  => { handleCalculatorChange('off') } } /> */}
         </SwitchDivision2>
       </SwitchesLeftContainer>
-      <SwitchesLeftContainer style={ { top: '40%'} }>
+      <SwitchesLeftContainer>
         <SwitchesLeftText2>
           <SwitchesLeftLightText>
             Escolha seu
@@ -623,6 +688,7 @@ const Calculator = () => {
           {/* <PurpleSwitch2 checked={ flexQueue } onClick={ () => { handleQueueChange() } } /> */}
         </SwitchDivision2>
       </SwitchesLeftContainer>
+      </div>
 
       <SelectElo callback={(e) => { selectEloCbTo(e) } } handleClose={ handleModalChange } open={ modalState } desired={ true } disabledFrom={ fromEloState.toLocaleLowerCase() }  />
       <SelectElo callback={(e) => { selectEloCbFrom(e) } } handleClose={ handleModalChangeFrom } open={ modalStateFrom } desired={ false } disabledFrom={ 'ferro 4' } />
@@ -632,9 +698,9 @@ const Calculator = () => {
             <QueueHeader>SERVIÇO</QueueHeader>
         </QueueHeaderContainer>
         <QueueContainer>
-          <QueueBox>
-            <span onClick={ () => { handleDivisionChange() } } style={ division != 'SOLO' ? { color: '#C7C7C7'} : {} }>SOLO</span>
-            <span onClick={ () => { handleDivisionChange() } } style={ division != 'DUO' ? { color: '#C7C7C7', marginLeft: '16px' } : { marginLeft: '16px' } }>DUO</span>
+          <QueueBox id="divisionChange" onClick={ () => { handleDivisionChange() } }>
+            <span style={ division != 'SOLO' ? { cursor: 'pointer', color: '#C7C7C7'} : {cursor: 'pointer'} }>SOLO</span>
+            <span style={ division != 'DUO' ? { cursor: 'pointer', color: '#C7C7C7', marginLeft: '16px' } : { cursor: 'pointer', marginLeft: '16px' } }>DUO</span>
             <BorderImage src={borderImage}/>
           </QueueBox>
         </QueueContainer> 
@@ -642,8 +708,8 @@ const Calculator = () => {
           direction="row"
           justify="center"
           alignItems="center"
-          style={{ minHeight: '100vh', maxHeight: '100vh'}}
           >
+          <MobileMgTop>
 
           <MobileContainer>
             <MobileCategoryContainer>
@@ -670,11 +736,11 @@ const Calculator = () => {
             <MobileCategoryBox onClick={ () => { handleQueueChange() } } style={ flexQueue ? { background: '#F4A340' }  : { color: '#7B7B7B', background: '#D7D7D7' } }>
               FLEX
             </MobileCategoryBox>
-
           </MobileContainer>
-
-          <Grid item xs={0} s={0} md={1}></Grid>
-          <Grid item xs={12} s={12} md={3} style={ { display:'flex'} }>
+          </MobileMgTop >
+          <MobileMgTop2/>
+          <Grid item xs={0} s={0} md={2} ></Grid>
+          <Grid item xs={12} s={12} md={3} >
             <FlagContainer>
               <CurrentElo>
                 Elo <b style={{ marginLeft: '6px', fontWeight: 800 }} >atual</b>
@@ -694,6 +760,8 @@ const Calculator = () => {
             </FlagContainer>
           </Grid>
           <Grid item xs={12} s={12} md={3} lg={3}>
+          <DivRightContainer>
+
           { divisionCalculator &&
             <FlagContainer>
               <DesiredElo>
@@ -724,9 +792,10 @@ const Calculator = () => {
               </VictoryCalculatorContainer>
             </>
            }
+          </DivRightContainer>
           </Grid>
           {/* <Grid item xs={0} s={0} md={1}></Grid> */}
-          <Grid item xs={12} s={12} md={4} lg={3} style={{ marginBottom: '64px' }}>
+          <Grid item xs={12} s={12} md={3} lg={3} style={{ marginBottom: '64px' }}>
             <div style={{ height: '100%', width: '100%', position: 'relative'}} >
             <CheckoutOrderBgImage src={checkoutBg} />
             <CheckoutOrderBoxContainer>
@@ -739,15 +808,15 @@ const Calculator = () => {
               <SubTitleBox>
                 <Division>
                   DIVISAO { division }
-                  { discountedValue > 0 && 
+                  { (discountedValue > 0 || promotionValueDiscount > 0 || promotionPercentageDiscount > 0) && 
                     <DiscountBox>
-                      { handleDiscountedValue(discountedValue) }
+                      { handleDiscountedValue(discountedValue, promotionValueDiscount, promotionPercentageDiscount) }
                     </DiscountBox>
                   }
                 </Division>
-                { discountedValue > 0 && 
+                { (discountedValue > 0 || promotionValueDiscount > 0 || promotionPercentageDiscount > 0)&& 
                   <SalePrice>
-                    { handleDiscountPrice(displayedTotal)}R$
+                    { handleDiscountPrice2(displayedTotal)}R$
                   </SalePrice>
                 }
               </SubTitleBox>
@@ -766,7 +835,7 @@ const Calculator = () => {
                   victoryCalculator &&
                     <FreeChampionAdition style={ { marginTop: 0 } }>
                       <span style={ { margin: 'auto 0' } }>MD10</span>
-                      <input checked={md10} type="checkbox"  onClick={() => { handleMd10Switch() }} /><label for="switch">Toggle</label>
+                      <input checked={md10} type="checkbox"  /><label onClick={() => { handleMd10Switch() }} for="switch">Toggle</label>
                       {/* <PurpleSwitch checked={md10} onChange={() => { handleMd10Switch() }} name="checkedA"/> */}
                     </FreeChampionAdition>
                 }
@@ -775,11 +844,22 @@ const Calculator = () => {
                   return (
                   <FreeChampionAdition style={ (index > 0 || victoryCalculator ) ? { marginTop: 0 } : {} }>
                     <span style={ { margin: 'auto 0' } }>{ service.name }</span>
-                    <input checked={checked[service.name]} type="checkbox"  onClick={() => { handleCheckChange(service.name) }} /><label for="switch">Toggle</label>
+                    <input checked={checked[service.name]} type="checkbox" /><label onClick={() => { handleCheckChange(service.name) }} for="switch">Toggle</label>
                     {/* <PurpleSwitch checked={checked[service.name]} onChange={() => { handleCheckChange(service.name) }} name="checkedA"/> */}
                   </FreeChampionAdition>
                   )
                 }) : <CircularProgress style={ { marginTop: '16px' } }/> }
+              </OrderAditionsBox>
+              <OrderAditionsBox>
+                <div style={{display: 'flex'}}>
+                  <PromotionInputLabel>Cupom</PromotionInputLabel>
+                  <PromotionInput value={inputPromotionValue} onChange={(e) => {
+                    setInputPromotionValue(e.target.value);
+                    handlePromotioncall(e.target.value);
+                  }}/>
+                </div>
+                <PromotionErrorLabel>{promotionError}</PromotionErrorLabel>
+                { promotionSuccessLabel != "" ? <PromotionSuccessLabel>{promotionSuccessLabel}</PromotionSuccessLabel> : <></>}
               </OrderAditionsBox>
             </CheckoutOrderBoxContainer>
             <TotalAmountBox>

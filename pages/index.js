@@ -149,8 +149,8 @@ const App = () => {
             <MyBox>
               <TextContainer>
                 <HeaderLabel href="https://www.noiscarrega.com.br/" rel="noopener" target="blank">INICIO</HeaderLabel>
-                <HeaderLabel href="https://www.noiscarrega.com.br/solo" rel="noopener" target="blank" >SOLO</HeaderLabel>
-                <HeaderLabel href="https://www.noiscarrega.com.br/" rel="noopener" target="blank">DUO</HeaderLabel>
+                <HeaderLabel onClick={() => { let a = document.getElementById("divisionChange").click(); }} rel="noopener" target="blank" >SOLO</HeaderLabel>
+                <HeaderLabel onClick={() => { let a = document.getElementById("divisionChange").click(); }} rel="noopener" target="blank">DUO</HeaderLabel>
                 <HeaderLabel href="https://www.noiscarrega.com.br/sobre-nós" rel="noopener" target="blank">SOBRE NÓS</HeaderLabel>
                 <HeaderLabel href="https://www.noiscarrega.com.br/" rel="noopener" target="blank">FAQ</HeaderLabel>
               </TextContainer>

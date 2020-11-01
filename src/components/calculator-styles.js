@@ -84,11 +84,14 @@ export const QueueHeaderContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-top: 24px;
+  font-weight: 600;
 `;
 
 export const QueueHeader = styled.div`
   height: 24px;
   width: 202px;
+  font-weight: 600;
   color: #68749D;
   font-weight: 500;
   font-size: 22px;
@@ -99,10 +102,23 @@ export const QueueHeader = styled.div`
   text-transform: uppercase;
   display: flex;
   justify-content: center;
+  padding-right: 14%;
+  @media only screen and (max-width: 768px) {
+    padding-right: 0px;
+  }
+`;
+
+export const MobileMgTop2 = styled.div`
+  margin-top: 30px;
+  width: 100%;
+  @media only screen and (max-width: 768px) {
+    margin-top: 0px;
+  }
 `;
 
 export const QueueBox = styled.div`
   height: 42px;
+  padding-right: 14%;
   width: 202px;
   position: relative;
   cursor: pointer;
@@ -114,14 +130,24 @@ export const QueueBox = styled.div`
   align-items: center;
   font-weight: 700;
   font-size: 24px;
+  @media only screen and (max-width: 768px) {
+    padding-right: 0px;
+  }
+`;
+
+export const DivRightContainer = styled.div`
+  position: relative;
+  right: 64px;
+  @media only screen and (max-width: 1000px) {
+    right: 0px;
+  }
 `;
 
 export const BorderImage = styled.img`
-  height: 58px;
-  width: 113%;
+  height: 48px;
+  width: 140px;
   position: absolute;
-  bottom: -40px;
-  left: -6px;
+  bottom: -26px;
 `;
 
 export const SwitchesLeftText = styled.div`
@@ -379,9 +405,6 @@ export const Pdl = styled.p`
 `;
 
 export const SwitchesLeftContainer = styled.div`
-  position: absolute;
-  left: -2px;
-  top: 15%;
   @media only screen and (max-width: 768px) {
     display: none;
   }
@@ -400,6 +423,34 @@ export const MobileCategoryContainer = styled.div`
   text-align: center;
   color: #1D3F73;
 `;
+
+export const PromotionInput = styled.input`
+  width: 100%;
+  height: 24px;
+  padding: 16px;
+  display: inline;
+  color: black;
+`;
+
+export const PromotionErrorLabel = styled.p`
+  font-size: 16px;
+  color: red;
+  margin-top: 16px;
+`;
+
+export const PromotionSuccessLabel = styled.p`
+  font-size: 16px;
+  color: chartreuse;
+  margin-top: 16px;
+`;
+
+export const PromotionInputLabel = styled.span`
+  font-size: 18px;
+  color: white;
+  display: inline;
+  margin: 6px 16px 0 0 ;
+`;
+
 export const MobileCategoryLight = styled.p`
   font-weight: 300;
 `;
@@ -423,7 +474,8 @@ export const MobileCategoryBox = styled.div`
 export const DiscountBox = styled.div`
   color: white;
   background: red;
-  width: 54px;
+  width: auto;
+  min-width: 54px;
   display: inline-flex;
   justify-content: center;
   margin: 0 8px;
@@ -584,10 +636,10 @@ export const CheckoutOrderBoxContainer = styled.div`
 export const CheckoutOrderBgImage = styled.img`
   z-index: -1;
   width: 148%;
-  height: 192%;
+  height: 148%;
   position: absolute;
   z-index: -1;
-  top: -160px;
+  top: -126px;
   right: -25%;
 `;
 
@@ -666,6 +718,7 @@ export const TotalPrice = styled.div`
 export const OrderAditionsBox = styled.div`
   padding: 24px 24px 16px;
   margin: 0 0;
+  min-height: 42px;
   font-weight: normal;
   border-bottom: 1px solid white;
 `;
@@ -745,13 +798,21 @@ export const ButtonOrderBox = styled.div`
 export const ButtonOrder = styled.div`
   margin: 0 24px;
   color: #F28C3C;
-  border-radius: 4px;
   text-align: center;
   background: #FCDC4B;
   height: 42px;
   display: flex;
   justify-content: center;
   align-items: center;
+  &:after {
+    content: '';
+    width: calc(100% - 38px);
+    height: 48px;
+    background: transparent;
+    border: 1px solid white;
+    position: absolute;
+    z-index: 2;
+  }
 `;
 
 
