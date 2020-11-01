@@ -740,7 +740,7 @@ const Calculator = () => {
           </MobileMgTop >
           <MobileMgTop2/>
           <Grid item xs={0} s={0} md={2} ></Grid>
-          <Grid item xs={12} s={12} md={3} >
+          <Grid item xs={12} s={12} md={3}>
             <FlagContainer>
               <CurrentElo>
                 Elo <b style={{ marginLeft: '6px', fontWeight: 800 }} >atual</b>
@@ -796,7 +796,7 @@ const Calculator = () => {
           </Grid>
           {/* <Grid item xs={0} s={0} md={1}></Grid> */}
           <Grid item xs={12} s={12} md={3} lg={3} style={{ marginBottom: '64px' }}>
-            <div style={{ height: '100%', width: '100%', position: 'relative'}} >
+            <div style={{ paddingTop: 100, height: '100%', width: '100%', position: 'relative'}} >
             <CheckoutOrderBgImage src={checkoutBg} />
             <CheckoutOrderBoxContainer>
               <CheckoutHeader>

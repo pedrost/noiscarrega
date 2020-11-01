@@ -284,11 +284,13 @@ export const FlagContainer = styled.div`
   position: relative;
   height: 100%;
   width: 100%;
+  top: -140px;
   display: flex;
   justify-content: center;
   max-width: 300px;
   margin: auto;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 900px) {
+    top: 0;
     margin-top: 70px;
     margin-bottom: 24px;
   }
@@ -636,10 +638,10 @@ export const CheckoutOrderBoxContainer = styled.div`
 export const CheckoutOrderBgImage = styled.img`
   z-index: -1;
   width: 148%;
-  height: 148%;
+  height: 136%;
   position: absolute;
   z-index: -1;
-  top: -126px;
+  top: -102px;
   right: -25%;
 `;
 
