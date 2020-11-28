@@ -829,7 +829,7 @@ const Calculator = () => {
                 }
                 <TotalPrice>{ handleDisplayedTotal(displayedTotal) } R$</TotalPrice>
               </OrderBox>
-              <OrderAditionsBox>
+              <OrderAditionsBox style={ { minHeight: '476px' } }>
                 <OrdersAditionsTitle>PRODUTOS ADICIONAIS</OrdersAditionsTitle>
                 {
                   victoryCalculator &&

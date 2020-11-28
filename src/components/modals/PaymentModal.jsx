@@ -14,10 +14,11 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { 
     HeaderProfileContainer,
+    PayPicpay,
     GridContainer
 } from './select-elo-styles';
 
-import Box from '@material-ui/core/Box';
+import PicpayLogo from "assets/picpay.png";
 
 const styles = (theme) => ({
 root: {
@@ -101,6 +102,11 @@ const SelecElo = ({ valueParam, open=true, handleClose=()=>{} }) => {
           alignItems="center">
 					{ paypalLoaded && <CircularProgress /> }
 					<div id="paypal-button-container"></div>
+          { !paypalLoaded && 
+            <a href="https://app.picpay.com/user/noiscarrega" target="blank" rel="noopener">
+              <PayPicpay src={PicpayLogo} />
+            </a>      
+          }
         </Grid>
         </DialogContent>
       </Dialog>

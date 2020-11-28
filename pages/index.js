@@ -149,10 +149,10 @@ const App = () => {
             <MyBox>
               <TextContainer>
                 <HeaderLabel href="https://www.noiscarrega.com.br/" rel="noopener" target="blank">INICIO</HeaderLabel>
-                <HeaderLabel onClick={() => { let a = document.getElementById("divisionChange").click(); }} rel="noopener" target="blank" >SOLO</HeaderLabel>
-                <HeaderLabel onClick={() => { let a = document.getElementById("divisionChange").click(); }} rel="noopener" target="blank">DUO</HeaderLabel>
+                <HeaderLabel href="https://www.noiscarrega.com.br/soloboost" rel="noopener" target="blank" >SOLO</HeaderLabel>
+                <HeaderLabel href="https://www.noiscarrega.com.br/personal-duo" rel="noopener" target="blank">DUO</HeaderLabel>
                 <HeaderLabel href="https://www.noiscarrega.com.br/sobre-nós" rel="noopener" target="blank">SOBRE NÓS</HeaderLabel>
-                <HeaderLabel href="https://www.noiscarrega.com.br/" rel="noopener" target="blank">FAQ</HeaderLabel>
+                <HeaderLabel href="https://www.noiscarrega.com.br/coach" rel="noopener" target="blank">COACH</HeaderLabel>
               </TextContainer>
             </MyBox>
           </LogoContainer>
